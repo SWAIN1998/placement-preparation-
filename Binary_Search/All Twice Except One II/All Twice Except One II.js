@@ -1,35 +1,22 @@
-function runProgram(input){
-    input=input.trim().split("\n")
-   var tc=+input[0]
-    var line=1;
-    for(var i=0;i<tc;i++){
-        var n=+input[line++]
-        var arr=input[line++].split(" ").map(Number)
-        findTwice(arr,n)
-    }
+function runProgram(input) {
+  let lines = input.trim().split('\n');
+  let t = parseInt(lines[0]);
+  let currentLine = 1;
+  
+  for(let i = 0; i < t; i++) {
+      let n = parseInt(lines[currentLine]);
+      let arr = lines[currentLine + 1].trim().split(' ').map(Number);
+      currentLine += 2;
+  }
 }
-//Enter code here
-function findTwice(arr,n)
-{
-    let obj={};
-    for(let i=0;i<arr.length;i++){
-        if(obj[arr[i]]==undefined){
-            obj[arr[i]]=1;
-        }
-        else{
-            obj[arr[i]]++;
-        }
-    }
-    for(let key in obj){
-        if(obj[key]===1){
-            console.log(key)
-            break;
-        }
-    }
-}
-        
 
- 
+function findTwice(arr, n) {
+  let result = 0;
+  for(let i = 0; i < arr.length; i++) {
+      result ^= arr[i];
+  }
+  return result;
+}
 
 if (process.env.USER === "") {
   runProgram(``);
@@ -38,16 +25,16 @@ if (process.env.USER === "") {
   process.stdin.setEncoding("ascii");
   let read = "";
   process.stdin.on("data", function (input) {
-    read += input;
+      read += input;
   });
   process.stdin.on("end", function () {
-    read = read.replace(/\n$/, "");
-    read = read.replace(/\n$/, "");
-    runProgram(read);
+      read = read.replace(/\n$/, "");
+      read = read.replace(/\n$/, "");
+      runProgram(read);
   });
   process.on("SIGINT", function () {
-    read = read.replace(/\n$/, "");
-    runProgram(read);
-    process.exit(0);
+      read = read.replace(/\n$/, "");
+      runProgram(read);
+      process.exit(0);
   });
 }
